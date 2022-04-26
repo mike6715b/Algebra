@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+</head>
+<body>
+    <h1>Hello world</h1>
+    <p></p>
+</body>
+
+<script>
+    //cycle h1 text color
+    var h1 = document.querySelector('h1');
+    var color = ['red', 'green', 'blue', 'yellow'];
+    var i = 0;
+    setInterval(function(){
+        h1.style.color = color[i];
+        i++;
+        if(i >= color.length){
+            i = 0;
+        }
+    }, 1000);
+
+    //load 5 movies from tvmaze api in paragraph tags with fetch with images
+    var p = document.querySelector('p');
+    var url = 'http://api.tvmaze.com/shows';
+    fetch(url)
+        .then(function(response){
+            return response.json();
+        })
+        .then(function(data){
+            console.log(data);
+            for(var i = 0; i < 5; i++){
+                var img = document.createElement('img');
+                img.src = data[i].image.medium;
+                p.appendChild(img);
+            }
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+
+</script>
+
+</html>
